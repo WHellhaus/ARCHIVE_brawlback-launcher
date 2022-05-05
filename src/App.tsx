@@ -7,7 +7,9 @@ import { useRoutes } from 'react-router-dom';
 
 import getThemeOptions from './theme';
 
-import { AppBase } from './Pages/';
+import { AppBase, Settings } from './Pages/';
+
+import SettingsContextProvider  from './ContextProviders/SettingsContext';
 
 function Home() {
   return (
@@ -39,7 +41,8 @@ export const routesObj = [
       },
       {
         path: 'settings',
-        name: 'settings'
+        name: 'settings',
+        element: <Settings />
       }
     ]
   }
@@ -57,8 +60,10 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <SettingsContextProvider>
+        <CssBaseline />
         { routes }
+      </SettingsContextProvider>
     </ThemeProvider>
   );
 }
